@@ -9,7 +9,7 @@ import javax.persistence.Table;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "transaction")
-public class Transaction extends AuditModel {
+public class BankTransaction extends AuditModel {
 	
 	@Column(name = "bank_name")
 	private String bankName;
