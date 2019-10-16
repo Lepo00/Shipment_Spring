@@ -1,4 +1,4 @@
-package it.anoki.spring.SpringApp;
+package it.anoki.spring;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
