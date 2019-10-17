@@ -8,9 +8,9 @@ import javax.persistence.Table;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "transaction")
+@Table(name = "bank_transaction")
 public class BankTransaction extends AuditModel {
-	
+
 	@Column(name = "bank_name")
 	private String bankName;
 
@@ -31,6 +31,14 @@ public class BankTransaction extends AuditModel {
 
 	public enum TransactionTypeEnum {
 		CHARGE, REFUND;
+	}
+
+	public String getBankName() {
+		return bankName;
+	}
+
+	public void setBankName(String bankName) {
+		this.bankName = bankName;
 	}
 
 	public Double getAmount() {
