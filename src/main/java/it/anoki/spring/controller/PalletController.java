@@ -11,18 +11,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import it.anoki.spring.model.BankTransaction;
-import it.anoki.spring.service.BankTransactionService;
+import it.anoki.spring.model.Pallet;
+import it.anoki.spring.service.PalletService;
 
 @RestController
-class BankTransactionController {
+class PalletController {
 
 	@Autowired
-	private BankTransactionService bankTransactionService;
+	private PalletService palletService;
 
-	@GetMapping("/transaction/{id}")
-	ResponseEntity<BankTransaction> one(@PathVariable Long id) throws Exception {
-		Optional<BankTransaction> t = bankTransactionService.one(id);
+	@GetMapping("/pallet/{id}")
+	ResponseEntity<Pallet> one(@PathVariable Long id) throws Exception {
+		Optional<Pallet> t = palletService.one(id);
 		if (t.isPresent()) {
 			return ResponseEntity.ok(t.get());
 		} else {
@@ -30,13 +30,13 @@ class BankTransactionController {
 		}
 	}
 
-	@PostMapping("/transaction")
-	ResponseEntity<?> newBankTransaction(@RequestBody BankTransaction t) throws Exception {
+	@PostMapping("/pallet")
+	ResponseEntity<?> newPallet(@RequestBody Pallet t) throws Exception {
 		try {
-			BankTransaction save = bankTransactionService.save(t);
+			Pallet save = palletService.save(t);
 			return ResponseEntity.ok(save);
 		} catch (Exception e) {
-			return ResponseEntity.badRequest().body("Guest NOT Saved!");
+			return ResponseEntity.badRequest().body("Pallet Not Saved!");
 		}
 	}
 
