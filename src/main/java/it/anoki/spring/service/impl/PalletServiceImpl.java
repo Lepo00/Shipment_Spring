@@ -25,4 +25,12 @@ public class PalletServiceImpl implements PalletService {
 		return palletRepository.save(t);
 	}
 
+	@Override
+	public Pallet addPackage(Package p, Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+
 }

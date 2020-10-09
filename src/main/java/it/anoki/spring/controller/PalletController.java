@@ -21,7 +21,7 @@ class PalletController {
 	private PalletService palletService;
 
 	@GetMapping("/pallet/{id}")
-	ResponseEntity<Pallet> one(@PathVariable Long id) throws Exception {
+	public ResponseEntity<Pallet> one(@PathVariable Long id) throws Exception {
 		Optional<Pallet> t = palletService.one(id);
 		if (t.isPresent()) {
 			return ResponseEntity.ok(t.get());
@@ -31,7 +31,7 @@ class PalletController {
 	}
 
 	@PostMapping("/pallet")
-	ResponseEntity<?> newPallet(@RequestBody Pallet t) throws Exception {
+	public ResponseEntity<?> newPallet(@RequestBody Pallet t) throws Exception {
 		try {
 			Pallet save = palletService.save(t);
 			return ResponseEntity.ok(save);
@@ -40,4 +40,16 @@ class PalletController {
 		}
 	}
 
+	@PostMapping("/{id}/package")
+	public ResponseEntity<?> addPackage(
+			@PathVariable Long id,
+			@RequestBody Package p
+			) throws Exception {
+		try {
+			Pallet save = palletService.addPackage(p,id);
+			return ResponseEntity.ok(save);
+		} catch (Exception e) {
+			return ResponseEntity.badRequest().body("Package Not Added!");
+		}
+	}
 }

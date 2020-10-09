@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
@@ -27,7 +28,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public abstract class AuditModel implements Serializable {
 
 	@JsonIgnore
-	private @Id @GeneratedValue Long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private @Id Long id;
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
 	@Temporal(TemporalType.TIMESTAMP)
