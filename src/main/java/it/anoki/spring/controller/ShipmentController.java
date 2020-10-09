@@ -9,6 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -49,6 +50,16 @@ public class ShipmentController {
 			return ResponseEntity.ok(save);
 		} catch (Exception e) {
 			return ResponseEntity.badRequest().body("Pallet Not Added!");
+		}
+	}
+	
+	@PutMapping("/{id}/close")
+	public ResponseEntity<?> addPallet(@PathVariable Long id)throws Exception{
+		try {
+			Shipment close = shipmentService.close(id);
+			return ResponseEntity.ok(close);
+		} catch (Exception e) {
+			return ResponseEntity.badRequest().body("Can't close order!");
 		}
 	}
 	

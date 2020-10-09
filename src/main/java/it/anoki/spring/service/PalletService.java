@@ -3,6 +3,7 @@ package it.anoki.spring.service;
 import java.util.Optional;
 
 import it.anoki.spring.model.Pallet;
+import it.anoki.spring.model.Package;
 
 public interface PalletService {
 
@@ -10,5 +11,5 @@ public interface PalletService {
 
 	public Pallet save(Pallet t) throws Exception;
 
-	public Pallet addPackage(Package p, Long id);
+	public boolean addPackage(Package p, Long id);
 }

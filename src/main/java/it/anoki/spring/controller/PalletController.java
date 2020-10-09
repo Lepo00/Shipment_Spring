@@ -9,18 +9,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.anoki.spring.model.Pallet;
+import it.anoki.spring.model.Package;
 import it.anoki.spring.service.PalletService;
 
 @RestController
+@RequestMapping("/pallet")
 class PalletController {
 
 	@Autowired
 	private PalletService palletService;
 
-	@GetMapping("/pallet/{id}")
+	@GetMapping("/detail/{id}")
 	public ResponseEntity<Pallet> one(@PathVariable Long id) throws Exception {
 		Optional<Pallet> t = palletService.one(id);
 		if (t.isPresent()) {
@@ -30,7 +33,7 @@ class PalletController {
 		}
 	}
 
-	@PostMapping("/pallet")
+	@PostMapping("/save")
 	public ResponseEntity<?> newPallet(@RequestBody Pallet t) throws Exception {
 		try {
 			Pallet save = palletService.save(t);
@@ -46,7 +49,7 @@ class PalletController {
 			@RequestBody Package p
 			) throws Exception {
 		try {
-			Pallet save = palletService.addPackage(p,id);
+			Boolean save = palletService.addPackage(p,id);
 			return ResponseEntity.ok(save);
 		} catch (Exception e) {
 			return ResponseEntity.badRequest().body("Package Not Added!");

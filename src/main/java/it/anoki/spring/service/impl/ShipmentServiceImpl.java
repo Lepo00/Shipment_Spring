@@ -44,5 +44,12 @@ public class ShipmentServiceImpl implements ShipmentService{
 		return palletRepository.save(p);
 	}
 
+	@Override
+	public Shipment close(Long id) {
+		if(shipmentRepository.findById(id).isPresent())
+			shipmentRepository.findById(id).get().closeStatus();
+		return shipmentRepository.findById(id).get();
+	}
+
 	
 }
