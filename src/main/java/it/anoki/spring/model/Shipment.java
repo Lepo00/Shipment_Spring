@@ -85,5 +85,10 @@ public class Shipment extends AuditModel{
 	public void closeStatus() {
 		this.status=Status.CLOSED;
 	}
+	public boolean isOpen() {
+		if(this.status==Status.OPEN)
+			return true;
+		return false;
+	}
 	
 }

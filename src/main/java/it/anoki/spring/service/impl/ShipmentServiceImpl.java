@@ -37,18 +37,24 @@ public class ShipmentServiceImpl implements ShipmentService{
 	}
 
 	@Override
-	public Pallet addPallet(Pallet p, Long id) {
-		if(shipmentRepository.findById(id).isPresent() && p!=null) {
+	public boolean addPallet(Pallet p, Long id) {
+		if(shipmentRepository.findById(id).isPresent() && p!=null && shipmentRepository.findById(id).get().isOpen()) {
 			shipmentRepository.findById(id).get().getPallet().add(p);
+			palletRepository.save(p);
+			return true;
 		}
-		return palletRepository.save(p);
+		return false;
 	}
 
 	@Override
 	public Shipment close(Long id) {
-		if(shipmentRepository.findById(id).isPresent())
-			shipmentRepository.findById(id).get().closeStatus();
-		return shipmentRepository.findById(id).get();
+		Shipment shipment = null;
+		if(shipmentRepository.findById(id).isPresent()) {
+			shipment = shipmentRepository.findById(id).get();
+			shipment.closeStatus();
+			shipmentRepository.save(shipment);
+		}
+		return shipment;
 	}
 
 	

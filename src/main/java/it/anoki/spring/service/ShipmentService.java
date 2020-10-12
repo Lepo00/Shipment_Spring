@@ -9,7 +9,7 @@ public interface ShipmentService {
 
 	public Shipment save(String description, Date shipmentDate, Long idCustomer);
 	
-	public Pallet addPallet(Pallet p, Long id);
+	public boolean addPallet(Pallet p, Long id);
 
 	public Shipment close(Long id);
 	

@@ -46,8 +46,8 @@ public class ShipmentController {
 			@RequestBody Pallet p
 			) throws Exception {
 		try {
-			Pallet save = shipmentService.addPallet(p,id);
-			return ResponseEntity.ok(save);
+			boolean save = shipmentService.addPallet(p,id);
+			return ResponseEntity.ok(save ? "Added" : "Not added");
 		} catch (Exception e) {
 			return ResponseEntity.badRequest().body("Pallet Not Added!");
 		}
