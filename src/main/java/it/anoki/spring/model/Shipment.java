@@ -43,13 +43,13 @@ public class Shipment extends AuditModel{
 	
 	@ManyToMany
 	@JoinTable(name="shipment_details")
-	private List<Pallet> pallet;
+	private List<Pallet> pallets;
 	
-	public List<Pallet> getPallet() {
-		return pallet;
+	public List<Pallet> getPallets() {
+		return pallets;
 	}
-	public void setPallet(List<Pallet> pallet) {
-		this.pallet = pallet;
+	public void setPallets(List<Pallet> pallets) {
+		this.pallets = pallets;
 	}
 	public void setDescription(String description) {
 		this.description = description;
