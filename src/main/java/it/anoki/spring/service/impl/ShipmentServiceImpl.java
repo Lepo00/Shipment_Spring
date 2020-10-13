@@ -38,11 +38,12 @@ public class ShipmentServiceImpl implements ShipmentService{
 	}
 
 	@Override
-	public boolean addPallet(Pallet p, Long id) {
-		Optional<Shipment> shipment = shipmentRepository.findById(id);
-		if(shipment.isPresent() && p!=null && shipment.get().isOpen() && p.getMaxPackages()>0 && p.getPackages().size()<=p.getMaxPackages()) {
-			shipment.get().getPallets().add(p);
-			palletRepository.save(p);
+	public boolean addPallet(Long idPallet, Long idShipment) {
+		Optional<Shipment> shipment = shipmentRepository.findById(idShipment);
+		Optional<Pallet> pallet= palletRepository.findById(idPallet);
+		if(pallet.isPresent() && shipment.isPresent() && shipment.get().isOpen() && pallet.get().getMaxPackages()>0 && pallet.get().getPackages().size()<=pallet.get().getMaxPackages()) {
+			shipment.get().getPallets().add(pallet.get());
+			shipmentRepository.save(shipment.get());
 			return true;
 		}
 		return false;
@@ -57,6 +58,11 @@ public class ShipmentServiceImpl implements ShipmentService{
 			shipmentRepository.save(shipment);
 		}
 		return shipment;
+	}
+
+	@Override
+	public Optional<Shipment> one(Long id) {
+		return shipmentRepository.findById(id);
 	}
 
 	

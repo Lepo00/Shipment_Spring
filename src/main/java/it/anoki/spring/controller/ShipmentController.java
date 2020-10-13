@@ -1,12 +1,15 @@
 package it.anoki.spring.controller;
 
 import java.util.Date;
+import java.util.Optional;
 
 import javax.net.ssl.SSLEngineResult.Status;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -26,6 +29,16 @@ public class ShipmentController {
 	@Autowired
 	ShipmentService shipmentService;
 	
+	@GetMapping("/detail/{id}")
+	public ResponseEntity<Shipment> one(@PathVariable Long id) throws Exception {
+		Optional<Shipment> s = shipmentService.one(id);
+		if (s.isPresent()) {
+			return ResponseEntity.ok(s.get());
+		} else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		}
+	}
+	
 	@PostMapping("/save")
 	public ResponseEntity<?> newShipment(
 			@RequestParam String description,
@@ -43,11 +56,11 @@ public class ShipmentController {
 	@PostMapping("/{id}/pallet")
 	public ResponseEntity<?> addPallet(
 			@PathVariable Long id,
-			@RequestBody Pallet p
+			@RequestParam Long idPallet
 			) throws Exception {
 		try {
-			boolean save = shipmentService.addPallet(p,id);
-			return ResponseEntity.ok(save ? "Added" : "Not added");
+			boolean save = shipmentService.addPallet(idPallet,id);
+			return(save ? ResponseEntity.ok("Added") : ResponseEntity.badRequest().body("Pallet Not Added!"));
 		} catch (Exception e) {
 			return ResponseEntity.badRequest().body("Pallet Not Added!");
 		}

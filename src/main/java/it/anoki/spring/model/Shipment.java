@@ -42,7 +42,8 @@ public class Shipment extends AuditModel{
 	Status status;
 	
 	@ManyToMany
-	@JoinTable(name="shipment_details")
+	@JoinTable(name="shipment_details", joinColumns = @JoinColumn(name="pallet_id"),
+	inverseJoinColumns=@JoinColumn(name="shipment_id"))
 	private List<Pallet> pallets;
 	
 	public List<Pallet> getPallets() {
