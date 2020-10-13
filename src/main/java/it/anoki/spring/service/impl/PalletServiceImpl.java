@@ -32,14 +32,15 @@ public class PalletServiceImpl implements PalletService {
 	}
 
 	@Override
-	public boolean addPackage(Package p, Long id) {
-		if(!palletRepository.findById(id).isPresent())
+	public boolean addPackage(Long idPackage, Long idPallet) {
+		Optional<Pallet> pallet = palletRepository.findById(idPallet);
+		Optional<Package> pack = packageRepository.findById(idPackage);
+		
+		if(!pallet.isPresent() || !pack.isPresent() || pallet.get().getPackages().size()>=pallet.get().getMaxPackages())
 			return false;
-		Pallet pallet= palletRepository.findById(id).get();
-		if(pallet.getPackages().size()>=pallet.getMaxPackages())
-			return false;
-		palletRepository.findById(id).get().getPackages().add(p);
-		packageRepository.save(p);
+		
+		pallet.get().getPackages().add(pack.get());
+		palletRepository.save(pallet.get());
 		return true;
 	}
 	

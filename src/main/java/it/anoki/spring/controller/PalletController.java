@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.anoki.spring.model.Pallet;
@@ -49,11 +50,11 @@ class PalletController {
 	@PostMapping("/{id}/package")
 	public ResponseEntity<?> addPackage(
 			@PathVariable Long id,
-			@RequestBody Package p
+			@RequestParam Long idPackage
 			) throws Exception {
 		try {
-			Boolean save = palletService.addPackage(p,id);
-			return ResponseEntity.ok(save);
+			boolean save= palletService.addPackage(idPackage,id);
+			return (save ? ResponseEntity.ok("Package added"): ResponseEntity.badRequest().build());
 		} catch (Exception e) {
 			return ResponseEntity.badRequest().body("Package Not Added!");
 		}

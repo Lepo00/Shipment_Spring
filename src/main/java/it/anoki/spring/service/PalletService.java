@@ -11,5 +11,5 @@ public interface PalletService {
 
 	public Pallet save(Pallet t) throws Exception;
 
-	public boolean addPackage(Package p, Long id);
+	public boolean addPackage(Long idPackage, Long id);
 }
