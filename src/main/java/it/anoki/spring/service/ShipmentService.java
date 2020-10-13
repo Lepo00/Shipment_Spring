@@ -3,7 +3,6 @@ package it.anoki.spring.service;
 import java.util.Date;
 import java.util.Optional;
 
-import it.anoki.spring.model.Pallet;
 import it.anoki.spring.model.Shipment;
 
 public interface ShipmentService {

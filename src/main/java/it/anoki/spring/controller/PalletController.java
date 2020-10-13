@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.anoki.spring.model.Pallet;
-import it.anoki.spring.model.Package;
 import it.anoki.spring.service.PalletService;
 
 @RestController

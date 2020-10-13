@@ -3,7 +3,6 @@ package it.anoki.spring.service.impl;
 import java.util.Date;
 import java.util.Optional;
 
-import javax.net.ssl.SSLEngineResult.Status;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;

@@ -3,7 +3,6 @@ package it.anoki.spring.service;
 import java.util.Optional;
 
 import it.anoki.spring.model.Pallet;
-import it.anoki.spring.model.Package;
 
 public interface PalletService {
 
