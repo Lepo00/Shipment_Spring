@@ -41,7 +41,7 @@ public class ShipmentServiceImpl implements ShipmentService{
 	public boolean addPallet(Pallet p, Long id) {
 		Optional<Shipment> shipment = shipmentRepository.findById(id);
 		if(shipment.isPresent() && p!=null && shipment.get().isOpen() && p.getMaxPackages()>0 && p.getPackages().size()<=p.getMaxPackages()) {
-			shipment.get().getPallet().add(p);
+			shipment.get().getPallets().add(p);
 			palletRepository.save(p);
 			return true;
 		}
