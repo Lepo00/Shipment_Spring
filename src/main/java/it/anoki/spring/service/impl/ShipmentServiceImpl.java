@@ -1,6 +1,7 @@
 package it.anoki.spring.service.impl;
 
 import java.util.Date;
+import java.util.Optional;
 
 import javax.net.ssl.SSLEngineResult.Status;
 import javax.transaction.Transactional;
@@ -38,8 +39,9 @@ public class ShipmentServiceImpl implements ShipmentService{
 
 	@Override
 	public boolean addPallet(Pallet p, Long id) {
-		if(shipmentRepository.findById(id).isPresent() && p!=null && shipmentRepository.findById(id).get().isOpen()) {
-			shipmentRepository.findById(id).get().getPallet().add(p);
+		Optional<Shipment> shipment = shipmentRepository.findById(id);
+		if(shipment.isPresent() && p!=null && shipment.get().isOpen() && p.getMaxPackages()>0 && p.getPackages().size()<=p.getMaxPackages()) {
+			shipment.get().getPallet().add(p);
 			palletRepository.save(p);
 			return true;
 		}

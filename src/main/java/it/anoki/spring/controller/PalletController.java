@@ -34,10 +34,13 @@ class PalletController {
 	}
 
 	@PostMapping("/save")
-	public ResponseEntity<?> newPallet(@RequestBody Pallet t) throws Exception {
+	public ResponseEntity<?> newPallet(@RequestBody Pallet p) throws Exception {
 		try {
-			Pallet save = palletService.save(t);
-			return ResponseEntity.ok(save);
+			Pallet save = palletService.save(p);
+			if(save!=null)
+				return ResponseEntity.ok(save);
+			else
+				return ResponseEntity.badRequest().body("Pallet Not Saved!");
 		} catch (Exception e) {
 			return ResponseEntity.badRequest().body("Pallet Not Saved!");
 		}

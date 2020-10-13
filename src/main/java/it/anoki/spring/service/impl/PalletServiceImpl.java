@@ -25,8 +25,10 @@ public class PalletServiceImpl implements PalletService {
 	}
 
 	@Override
-	public Pallet save(Pallet t) throws Exception {
-		return palletRepository.save(t);
+	public Pallet save(Pallet p) throws Exception {
+		if(p.getMaxPackages()<=0 || p.getPackages().size()>p.getMaxPackages())
+			return null;
+		return palletRepository.save(p);
 	}
 
 	@Override

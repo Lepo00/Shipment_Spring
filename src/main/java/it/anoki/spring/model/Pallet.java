@@ -22,6 +22,10 @@ public class Pallet extends AuditModel {
 	@Column(name="max_packages")
 	private int maxPackages;
 	
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "pallet_id")
+	private List<Package> packages;
+	
 	public List<Package> getPackages() {
 		return packages;
 	}
@@ -29,10 +33,6 @@ public class Pallet extends AuditModel {
 	public void setPackages(List<Package> packages) {
 		this.packages = packages;
 	}
-
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "pallet_id")
-	private List<Package> packages;
 
 	public int getMaxPackages() {
 		return maxPackages;

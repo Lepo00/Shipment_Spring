@@ -16,9 +16,6 @@ public class Package extends AuditModel {
 	
 	@Column(name="weight")
 	private double weight;
-	
-	@ManyToOne(cascade = CascadeType.ALL)
-	private Pallet pallet;
 
 	public String getDescription() {
 		return description;
@@ -35,14 +32,5 @@ public class Package extends AuditModel {
 	public void setWeight(double weight) {
 		this.weight = weight;
 	}
-
-	public Pallet getPallet() {
-		return pallet;
-	}
-
-	public void setPallet(Pallet pallet) {
-		this.pallet = pallet;
-	}
-
 	
 }
